@@ -1,0 +1,24 @@
+/*-- scss:defaults --*/
+@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap');
+
+// Misma paleta, aclarada para fondo oscuro
+$anil:   #A9B9EC;
+$grana:  #E68FA4;
+$maguey: #9CC08F;
+$tinta:  #E6E8EF;
+
+$body-bg:    #161A2B;
+$body-color: $tinta;
+$primary:    $anil;
+$success:    $maguey;
+$danger:     $grana;
+$link-color: $anil;
+
+$font-family-sans-serif: "Atkinson Hyperlegible", "Segoe UI", Roboto, Arial, sans-serif;
+$font-family-monospace:  "JetBrains Mono", Consolas, "Courier New", monospace;
+$font-size-root: 18px;
+$headings-color: $anil;
+$headings-font-weight: 700;
+
+/*-- scss:rules --*/
+@import "comunes";

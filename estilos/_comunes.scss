@@ -1,0 +1,37 @@
+// Reglas compartidas por el tema claro y el oscuro
+
+// Ancho de lectura cómodo
+p, li { line-height: 1.65; }
+
+// Portada: título grande y directo
+.titulo-portada {
+  font-size: clamp(2.2rem, 6vw, 3.4rem);
+  line-height: 1.1;
+  margin: 1.5rem 0 0.75rem;
+  color: $anil;
+}
+.subtitulo-portada { font-size: 1.2rem; max-width: 36rem; }
+
+// Tarjetas de ejercicio: borde lateral color grana para distinguirlas
+// de los bloques de práctica libre
+.exercise-cell .card { border-left: 5px solid $grana; }
+.exercise-cell .card-header { font-weight: 700; }
+
+// Retroalimentación más visible
+.exercise-grade { font-size: 1.05rem; border-width: 2px; }
+
+// Bloque de "objetivos" al inicio de cada lección
+.objetivos {
+  border: 2px solid $anil;
+  border-radius: 6px;
+  padding: 0.9rem 1.2rem;
+  margin: 1.25rem 0 2rem;
+  h3 { margin-top: 0; font-size: 1.1rem; }
+  ul { margin-bottom: 0; }
+}
+
+// Foco visible al navegar con teclado
+a:focus-visible, .btn:focus-visible {
+  outline: 3px solid $grana;
+  outline-offset: 2px;
+}

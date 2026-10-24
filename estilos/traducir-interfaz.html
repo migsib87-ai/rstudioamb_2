@@ -1,0 +1,69 @@
+<!--
+  Traduce al español los textos de los botones y mensajes de quarto-live,
+  que vienen en inglés de origen. Si quieres cambiar algún texto,
+  edita el diccionario TRADUCCIONES.
+-->
+<script>
+(function () {
+  const TRADUCCIONES = [
+    [/^Run Code$/, "Ejecutar"],
+    [/^Start Over$/, "Reiniciar"],
+    [/^Show Hint$/, "Ver pista"],
+    [/^Next Hint$/, "Siguiente pista"],
+    [/^Show Solution$/, "Ver solución"],
+    [/^R Code$/, "Código R"],
+    [/^Exercise$/, "Ejercicio"],
+    [/^Downloading webR$/, "Cargando R en tu navegador…"],
+    [/^Installing webR shims$/, "Preparando R…"],
+    [/^Downloading package: (.+)$/, "Descargando paquete: $1"],
+    [/^Downloading resource: (.+)$/, "Descargando archivo: $1"],
+    [/^Please replace ______ with valid code\.$/, "Sustituye los espacios ______ por tu código."]
+  ];
+
+  function traducirTexto(texto) {
+    const limpio = texto.trim();
+    for (const [patron, reemplazo] of TRADUCCIONES) {
+      if (patron.test(limpio)) return limpio.replace(patron, reemplazo);
+    }
+    return null;
+  }
+
+  function traducirNodo(raiz) {
+    const recorrido = document.createTreeWalker(raiz, NodeFilter.SHOW_TEXT);
+    let nodo;
+    while ((nodo = recorrido.nextNode())) {
+      const nuevo = traducirTexto(nodo.nodeValue);
+      if (nuevo !== null && nuevo !== nodo.nodeValue) nodo.nodeValue = nuevo;
+    }
+    if (raiz.querySelectorAll) {
+      raiz.querySelectorAll("[aria-label]").forEach((el) => {
+        const nuevo = traducirTexto(el.getAttribute("aria-label"));
+        if (nuevo !== null) el.setAttribute("aria-label", nuevo);
+      });
+    }
+  }
+
+  const observador = new MutationObserver((cambios) => {
+    for (const cambio of cambios) {
+      if (cambio.type === "characterData") {
+        const nuevo = traducirTexto(cambio.target.nodeValue);
+        if (nuevo !== null && nuevo !== cambio.target.nodeValue) cambio.target.nodeValue = nuevo;
+      } else {
+        cambio.addedNodes.forEach((n) => {
+          if (n.nodeType === Node.TEXT_NODE) {
+            const nuevo = traducirTexto(n.nodeValue);
+            if (nuevo !== null && nuevo !== n.nodeValue) n.nodeValue = nuevo;
+          } else if (n.nodeType === Node.ELEMENT_NODE) {
+            traducirNodo(n);
+          }
+        });
+      }
+    }
+  });
+
+  document.addEventListener("DOMContentLoaded", () => {
+    traducirNodo(document.body);
+    observador.observe(document.body, { childList: true, subtree: true, characterData: true });
+  });
+})();
+</script>

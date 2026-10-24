@@ -1,0 +1,47 @@
+# ==============================================================
+# Configuración general del sitio "Aprende R paso a paso"
+# ==============================================================
+
+project:
+  type: website
+  output-dir: docs           # Carpeta con el sitio final (GitHub Pages la publica)
+  resources:
+    - .nojekyll              # Evita que GitHub Pages procese el sitio con Jekyll
+
+# Motor de ejecución: knitr (requiere R + knitr + rmarkdown instalados
+# en la computadora donde se compila el sitio, NO en la del estudiante).
+engine: knitr
+
+lang: es                      # Textos de Quarto en español (buscador, índice, etc.)
+
+website:
+  title: "Aprende R paso a paso"
+  search: true
+  page-navigation: true       # Botones "anterior / siguiente" al pie de cada lección
+  sidebar:
+    style: docked
+    contents:
+      - text: "Inicio"
+        href: index.qmd
+      - section: "Lecciones"
+        contents:
+          - lecciones/01-primeros-pasos.qmd
+          # Agrega aquí las siguientes lecciones, por ejemplo:
+          # - lecciones/02-data-frames.qmd
+  page-footer:
+    center: "Tutorial interactivo de R · El código se ejecuta en tu navegador con webR"
+
+format:
+  live-html:                  # Formato de la extensión quarto-live (R interactivo)
+    theme:
+      light: [cosmo, estilos/claro.scss]
+      dark:  [cosmo, estilos/oscuro.scss]
+    toc: true
+    toc-title: "En esta lección"
+    include-after-body: estilos/traducir-interfaz.html
+
+# Opciones de los ejercicios interactivos
+live:
+  show-hints: true            # Mostrar botón de pistas
+  show-solutions: true        # Mostrar botón de solución (ponlo en false para un examen)
+  grading: true               # Activar la retroalimentación automática

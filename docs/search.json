@@ -1,0 +1,120 @@
+[
+  {
+    "objectID": "lecciones/01-primeros-pasos.html",
+    "href": "lecciones/01-primeros-pasos.html",
+    "title": "Lección 1: Primeros pasos con R",
+    "section": "",
+    "text": "Usar R como calculadora.\nGuardar valores en objetos con el operador &lt;-.\nCrear vectores con la función c().\nAplicar funciones como sum(), mean() y max() a un vector.\nExtraer elementos de un vector con corchetes [ ].",
+    "crumbs": [
+      "Lecciones",
+      "Lección 1: Primeros pasos con R"
+    ]
+  },
+  {
+    "objectID": "lecciones/01-primeros-pasos.html#r-como-calculadora",
+    "href": "lecciones/01-primeros-pasos.html#r-como-calculadora",
+    "title": "Lección 1: Primeros pasos con R",
+    "section": "1. R como calculadora",
+    "text": "1. R como calculadora\nR puede hacer operaciones aritméticas igual que una calculadora. Los operadores básicos son +, -, * (multiplicación), / (división) y ^ (potencia).\nEjecuta el siguiente bloque. Después cambia los números y vuelve a ejecutarlo para ver qué pasa.\n\n\n\n\n\n\n\n\nR respeta la jerarquía de operaciones: primero potencias, luego multiplicaciones y divisiones, y al final sumas y restas. Usa paréntesis para cambiar el orden: (2 + 3) * 4 da 20, pero 2 + 3 * 4 da 14.\n\nEjercicio 1\nEn un puesto del mercado 20 de Noviembre, una tlayuda cuesta 85 pesos y un agua fresca cuesta 25 pesos. Escribe una sola operación que calcule cuánto pagas por 3 tlayudas y 2 aguas.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPista\n\n\n\n\n\nPrimero piensa cuánto cuestan las 3 tlayudas (85 * 3) y cuánto las 2 aguas. Después súmalos con +.\n\n\n\n\n\n\n\n\n\n\n\nSolución\n\n\n\n\n\n85 * 3 + 25 * 2",
+    "crumbs": [
+      "Lecciones",
+      "Lección 1: Primeros pasos con R"
+    ]
+  },
+  {
+    "objectID": "lecciones/01-primeros-pasos.html#objetos-guardar-valores-con-nombre",
+    "href": "lecciones/01-primeros-pasos.html#objetos-guardar-valores-con-nombre",
+    "title": "Lección 1: Primeros pasos con R",
+    "section": "2. Objetos: guardar valores con nombre",
+    "text": "2. Objetos: guardar valores con nombre\nEn lugar de escribir los mismos números una y otra vez, podemos guardarlos en objetos. Para crear un objeto se usa la flecha de asignación &lt;- (se escribe con el signo menor que y un guion).\n\n\n\n\n\n\n\n\nAlgunas reglas para los nombres de objetos:\n\nPueden llevar letras, números, punto y guion bajo, pero no pueden empezar con un número.\nNo llevan espacios ni acentos. Usa guion bajo: precio_agua.\nR distingue mayúsculas de minúsculas: Precio y precio son objetos distintos.\n\n\nEjercicio 2\nCrea un objeto llamado precio_tlayuda que guarde el valor 85.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPista\n\n\n\n\n\nA la izquierda de la flecha va el nombre del objeto y a la derecha el valor: nombre &lt;- valor.\n\n\n\n\n\n\n\n\n\n\n\nSolución\n\n\n\n\n\nprecio_tlayuda &lt;- 85",
+    "crumbs": [
+      "Lecciones",
+      "Lección 1: Primeros pasos con R"
+    ]
+  },
+  {
+    "objectID": "lecciones/01-primeros-pasos.html#vectores-varios-valores-en-un-solo-objeto",
+    "href": "lecciones/01-primeros-pasos.html#vectores-varios-valores-en-un-solo-objeto",
+    "title": "Lección 1: Primeros pasos con R",
+    "section": "3. Vectores: varios valores en un solo objeto",
+    "text": "3. Vectores: varios valores en un solo objeto\nUn vector guarda varios valores del mismo tipo. Se crea con la función c() (de combinar), separando los valores con comas.\n\n\n\n\n\n\n\n\n\nEjercicio 3\nSegún el Censo de Población y Vivienda 2020 del INEGI, estos son los cinco municipios más poblados de Oaxaca:\n\n\n\nMunicipio\nPoblación\n\n\n\n\nOaxaca de Juárez\n270,955\n\n\nSan Juan Bautista Tuxtepec\n159,452\n\n\nJuchitán de Zaragoza\n113,570\n\n\nSanta Cruz Xoxocotlán\n100,402\n\n\nSalina Cruz\n84,438\n\n\n\nCrea un vector numérico llamado poblacion con estas cinco cifras, en el mismo orden de la tabla. Escribe los números sin comas de miles (R usaría la coma para separar elementos).\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPista 1\n\n\n\n\n\nDentro de c() separa cada número con una coma: c(270955, 159452, ...).\n\n\n\n\n\n\n\n\n\n\n\nPista 2\n\n\n\n\n\nNo escribas 270,955: para R eso son dos números distintos (270 y 955). Escribe 270955.\n\n\n\n\n\n\n\n\n\n\n\nSolución\n\n\n\n\n\npoblacion &lt;- c(270955, 159452, 113570, 100402, 84438)",
+    "crumbs": [
+      "Lecciones",
+      "Lección 1: Primeros pasos con R"
+    ]
+  },
+  {
+    "objectID": "lecciones/01-primeros-pasos.html#funciones",
+    "href": "lecciones/01-primeros-pasos.html#funciones",
+    "title": "Lección 1: Primeros pasos con R",
+    "section": "4. Funciones",
+    "text": "4. Funciones\nUna función recibe datos, hace algo con ellos y devuelve un resultado. Se escribe el nombre de la función y, entre paréntesis, los datos. Algunas funciones útiles para vectores numéricos:\n\n\n\nFunción\nQué hace\n\n\n\n\nsum(x)\nSuma todos los elementos\n\n\nmean(x)\nCalcula el promedio\n\n\nmax(x) / min(x)\nValor más grande / más pequeño\n\n\nlength(x)\nCuántos elementos tiene\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nEjercicio 4\nYa tienes cargado el vector poblacion del ejercicio anterior. Usa una función para calcular la población total de los cinco municipios.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPista\n\n\n\n\n\n“Total” significa sumar todos los valores. Busca en la tabla la función que suma.\n\n\n\n\n\n\n\n\n\n\n\nSolución\n\n\n\n\n\nsum(poblacion)",
+    "crumbs": [
+      "Lecciones",
+      "Lección 1: Primeros pasos con R"
+    ]
+  },
+  {
+    "objectID": "lecciones/01-primeros-pasos.html#extraer-elementos-con-corchetes",
+    "href": "lecciones/01-primeros-pasos.html#extraer-elementos-con-corchetes",
+    "title": "Lección 1: Primeros pasos con R",
+    "section": "5. Extraer elementos con corchetes",
+    "text": "5. Extraer elementos con corchetes\nCada elemento de un vector tiene una posición, empezando en 1. Para obtener un elemento, escribe el nombre del vector y la posición entre corchetes.\n\n\n\n\n\n\n\n\n\nEjercicio 5\nYa tienes cargado el vector municipios. Extrae el nombre del tercer municipio.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPista\n\n\n\n\n\nEscribe dentro de los corchetes el número de la posición que quieres.\n\n\n\n\n\n\n\n\n\n\n\nSolución\n\n\n\n\n\nmunicipios[3]",
+    "crumbs": [
+      "Lecciones",
+      "Lección 1: Primeros pasos con R"
+    ]
+  },
+  {
+    "objectID": "lecciones/01-primeros-pasos.html#reto-final",
+    "href": "lecciones/01-primeros-pasos.html#reto-final",
+    "title": "Lección 1: Primeros pasos con R",
+    "section": "Reto final",
+    "text": "Reto final\n\nEjercicio 6\nCombina lo que aprendiste: calcula qué porcentaje de la población total de los cinco municipios vive en Oaxaca de Juárez (el primer elemento de poblacion). El resultado debe ser un número entre 0 y 100.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPista 1\n\n\n\n\n\nUn porcentaje es parte / total × 100.\n\n\n\n\n\n\n\n\n\n\n\nPista 2\n\n\n\n\n\nLa parte es poblacion[1] y el total es sum(poblacion).\n\n\n\n\n\n\n\n\n\n\n\nSolución\n\n\n\n\n\npoblacion[1] / sum(poblacion) * 100",
+    "crumbs": [
+      "Lecciones",
+      "Lección 1: Primeros pasos con R"
+    ]
+  },
+  {
+    "objectID": "lecciones/01-primeros-pasos.html#resumen",
+    "href": "lecciones/01-primeros-pasos.html#resumen",
+    "title": "Lección 1: Primeros pasos con R",
+    "section": "Resumen",
+    "text": "Resumen\n\n\n\nConcepto\nEjemplo\n\n\n\n\nOperación\n85 * 3 + 25 * 2\n\n\nCrear un objeto\nprecio_tlayuda &lt;- 85\n\n\nCrear un vector\npoblacion &lt;- c(270955, 159452)\n\n\nAplicar una función\nsum(poblacion)\n\n\nExtraer un elemento\nmunicipios[3]\n\n\n\n\n\n\n\n\n\nPara practicar por tu cuenta\n\n\n\nUsa el bloque de abajo para experimentar. Por ejemplo: ¿cuál es el municipio con menos población? Prueba min(poblacion) y después which.min(poblacion). ¿Qué diferencia hay?",
+    "crumbs": [
+      "Lecciones",
+      "Lección 1: Primeros pasos con R"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Inicio",
+    "section": "",
+    "text": "Pruébalo ahora: escribe 2 + 2 en el recuadro y presiona Ejecutar.",
+    "crumbs": [
+      "Inicio"
+    ]
+  },
+  {
+    "objectID": "index.html#cómo-usar-este-tutorial",
+    "href": "index.html#cómo-usar-este-tutorial",
+    "title": "Inicio",
+    "section": "Cómo usar este tutorial",
+    "text": "Cómo usar este tutorial\n\nAvanza las lecciones en orden; cada una se apoya en la anterior.\nLee la explicación y juega con los bloques de código de ejemplo: puedes modificarlos y volver a ejecutarlos cuantas veces quieras.\nEn los ejercicios (recuadros con borde rojo) escribe tu respuesta y presiona Ejecutar. Aparecerá un mensaje verde si es correcta, o una indicación de qué corregir si no lo es.\nSi te atoras, usa Ver pista. Intenta resolverlo antes de abrir Ver solución.\n\n\n\n\n\n\n\nNotaPrimera carga\n\n\n\nLa primera vez que abres una lección, R tarda algunos segundos en cargarse en tu navegador. Después funciona de inmediato. Si usas el celular, funciona, pero es más cómodo en computadora.",
+    "crumbs": [
+      "Inicio"
+    ]
+  },
+  {
+    "objectID": "index.html#lecciones",
+    "href": "index.html#lecciones",
+    "title": "Inicio",
+    "section": "Lecciones",
+    "text": "Lecciones\n\n\n\nLección\nLo que aprenderás\n\n\n\n\n1. Primeros pasos\nUsar R como calculadora, crear objetos, vectores y funciones básicas\n\n\n2. Tablas de datos (próximamente)\nData frames con información de municipios de Oaxaca",
+    "crumbs": [
+      "Inicio"
+    ]
+  }
+]

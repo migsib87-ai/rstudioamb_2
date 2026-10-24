@@ -1,0 +1,503 @@
+---
+title: "Lección 1: Primeros pasos con R"
+subtitle: "Operaciones, objetos, vectores y funciones"
+---
+
+{{< include ../_extensions/r-wasm/live/_knitr.qmd >}}
+
+::: {.objetivos}
+### Al terminar esta lección podrás
+
+- Usar R como calculadora.
+- Guardar valores en **objetos** con el operador `<-`.
+- Crear **vectores** con la función `c()`.
+- Aplicar funciones como `sum()`, `mean()` y `max()` a un vector.
+- Extraer elementos de un vector con corchetes `[ ]`.
+:::
+
+## 1. R como calculadora
+
+R puede hacer operaciones aritméticas igual que una calculadora. Los
+operadores básicos son `+`, `-`, `*` (multiplicación), `/` (división)
+y `^` (potencia).
+
+Ejecuta el siguiente bloque. Después cambia los números y vuelve a
+ejecutarlo para ver qué pasa.
+
+```{webr}
+# Todo lo que va después de un # es un comentario: R lo ignora.
+# Los comentarios sirven para explicar el código.
+
+10 + 5      # suma
+10 * 5      # multiplicación
+10 / 4      # división
+2 ^ 3       # potencia: 2 elevado a la 3
+```
+
+R respeta la jerarquía de operaciones: primero potencias, luego
+multiplicaciones y divisiones, y al final sumas y restas. Usa paréntesis
+para cambiar el orden: `(2 + 3) * 4` da 20, pero `2 + 3 * 4` da 14.
+
+### Ejercicio 1
+
+En un puesto del mercado 20 de Noviembre, una tlayuda cuesta **85 pesos**
+y un agua fresca cuesta **25 pesos**. Escribe una sola operación que
+calcule cuánto pagas por **3 tlayudas y 2 aguas**.
+
+```{webr}
+#| exercise: ej1
+#| caption: Ejercicio 1
+______
+```
+
+::: {.hint exercise="ej1"}
+::: {.callout-note collapse="false"}
+## Pista
+Primero piensa cuánto cuestan las 3 tlayudas (`85 * 3`) y cuánto las 2
+aguas. Después súmalos con `+`.
+:::
+:::
+
+::: {.solution exercise="ej1"}
+::: {.callout-tip collapse="false"}
+## Solución
+```r
+85 * 3 + 25 * 2
+```
+:::
+:::
+
+```{webr}
+#| exercise: ej1
+#| check: true
+# --- Código de revisión (el estudiante no lo ve) ---
+# .result contiene el valor que produjo el código del estudiante.
+if (is.null(.result) || !is.numeric(.result)) {
+  list(correct = FALSE,
+       message = "Tu código debe producir un número. Escribe una operación aritmética.")
+} else if (isTRUE(all.equal(.result, 305))) {
+  list(correct = TRUE,
+       message = "¡Correcto! Pagas 305 pesos. R hizo primero las multiplicaciones y luego la suma.")
+} else if (isTRUE(all.equal(.result, 255))) {
+  list(correct = FALSE,
+       message = "Obtuviste 255: ese es solo el costo de las tlayudas. Te faltan las 2 aguas.")
+} else if (isTRUE(all.equal(.result, 50))) {
+  list(correct = FALSE,
+       message = "Obtuviste 50: ese es solo el costo de las aguas. Te faltan las 3 tlayudas.")
+} else {
+  list(correct = FALSE,
+       message = paste0("Obtuviste ", .result,
+                        ", pero la respuesta no es esa. Revisa las cantidades y los precios."))
+}
+```
+
+## 2. Objetos: guardar valores con nombre
+
+En lugar de escribir los mismos números una y otra vez, podemos
+guardarlos en **objetos**. Para crear un objeto se usa la flecha de
+asignación `<-` (se escribe con el signo *menor que* y un guion).
+
+```{webr}
+precio_agua <- 25        # guarda el número 25 con el nombre precio_agua
+precio_agua              # escribir el nombre muestra su contenido
+precio_agua * 4          # podemos usarlo en operaciones
+```
+
+Algunas reglas para los nombres de objetos:
+
+- Pueden llevar letras, números, punto y guion bajo, pero **no pueden
+  empezar con un número**.
+- No llevan espacios ni acentos. Usa guion bajo: `precio_agua`.
+- R distingue mayúsculas de minúsculas: `Precio` y `precio` son
+  objetos distintos.
+
+### Ejercicio 2
+
+Crea un objeto llamado `precio_tlayuda` que guarde el valor **85**.
+
+```{webr}
+#| exercise: ej2
+#| caption: Ejercicio 2
+______ <- ______
+```
+
+::: {.hint exercise="ej2"}
+::: {.callout-note collapse="false"}
+## Pista
+A la izquierda de la flecha va el nombre del objeto y a la derecha el
+valor: `nombre <- valor`.
+:::
+:::
+
+::: {.solution exercise="ej2"}
+::: {.callout-tip collapse="false"}
+## Solución
+```r
+precio_tlayuda <- 85
+```
+:::
+:::
+
+```{webr}
+#| exercise: ej2
+#| check: true
+# .envir_result es el "espacio de trabajo" después de correr el código
+# del estudiante; ahí buscamos el objeto que debió crear.
+valor <- get0("precio_tlayuda", envir = .envir_result, inherits = FALSE)
+nombres_creados <- ls(.envir_result)
+
+if (is.null(valor)) {
+  # ¿Creó algo con un nombre parecido?
+  parecidos <- nombres_creados[gsub("[^a-z]", "", tolower(nombres_creados)) == "preciotlayuda"]
+  if (length(parecidos) > 0) {
+    list(correct = FALSE,
+         message = paste0("Creaste el objeto `", parecidos[1],
+                          "`, pero el nombre debe ser exactamente `precio_tlayuda` ",
+                          "(todo en minúsculas y con guion bajo)."))
+  } else {
+    list(correct = FALSE,
+         message = "No encuentro un objeto llamado `precio_tlayuda`. Revisa que el nombre esté bien escrito.")
+  }
+} else if (is.character(valor)) {
+  list(correct = FALSE,
+       message = "Guardaste el valor como texto (entre comillas). Quita las comillas para que sea un número: 85.")
+} else if (isTRUE(all.equal(valor, 85))) {
+  list(correct = TRUE,
+       message = "¡Muy bien! Ahora `precio_tlayuda` vale 85 y puedes usarlo en cualquier operación.")
+} else {
+  list(correct = FALSE,
+       message = paste0("El objeto existe, pero vale ", valor, " en lugar de 85."))
+}
+```
+
+## 3. Vectores: varios valores en un solo objeto
+
+Un **vector** guarda varios valores del mismo tipo. Se crea con la
+función `c()` (de *combinar*), separando los valores con comas.
+
+```{webr}
+# Precios de cuatro productos de la canasta (en pesos)
+precios <- c(28, 45, 19, 62)
+precios
+
+# Los vectores también pueden contener texto, siempre entre comillas
+productos <- c("tortillas", "queso", "frijol", "café")
+productos
+```
+
+### Ejercicio 3
+
+Según el Censo de Población y Vivienda 2020 del INEGI, estos son
+los cinco municipios más poblados de Oaxaca:
+
+| Municipio | Población |
+|:--|--:|
+| Oaxaca de Juárez | 270,955 |
+| San Juan Bautista Tuxtepec | 159,452 |
+| Juchitán de Zaragoza | 113,570 |
+| Santa Cruz Xoxocotlán | 100,402 |
+| Salina Cruz | 84,438 |
+
+Crea un vector numérico llamado `poblacion` con estas cinco cifras,
+**en el mismo orden** de la tabla. Escribe los números sin comas de
+miles (R usaría la coma para separar elementos).
+
+```{webr}
+#| exercise: ej3
+#| caption: Ejercicio 3
+poblacion <- c(______)
+```
+
+::: {.hint exercise="ej3"}
+::: {.callout-note collapse="false"}
+## Pista 1
+Dentro de `c()` separa cada número con una coma: `c(270955, 159452, ...)`.
+:::
+:::
+
+::: {.hint exercise="ej3"}
+::: {.callout-note collapse="false"}
+## Pista 2
+No escribas `270,955`: para R eso son dos números distintos (270 y 955).
+Escribe `270955`.
+:::
+:::
+
+::: {.solution exercise="ej3"}
+::: {.callout-tip collapse="false"}
+## Solución
+```r
+poblacion <- c(270955, 159452, 113570, 100402, 84438)
+```
+:::
+:::
+
+```{webr}
+#| exercise: ej3
+#| check: true
+esperado <- c(270955, 159452, 113570, 100402, 84438)
+valor <- get0("poblacion", envir = .envir_result, inherits = FALSE)
+
+if (is.null(valor)) {
+  list(correct = FALSE,
+       message = "No encuentro un objeto llamado `poblacion` (sin acento). ¿Lo escribiste a la izquierda de `<-`?")
+} else if (is.character(valor)) {
+  list(correct = FALSE,
+       message = "Tu vector tiene texto. Escribe los números sin comillas.")
+} else if (length(valor) == 10) {
+  list(correct = FALSE,
+       message = "Tu vector tiene 10 elementos en lugar de 5. Seguramente escribiste los miles con coma (270,955); quita esas comas.")
+} else if (length(valor) != 5) {
+  list(correct = FALSE,
+       message = paste0("Tu vector tiene ", length(valor),
+                        " elementos, pero deben ser 5 (uno por municipio)."))
+} else if (isTRUE(all.equal(valor, esperado))) {
+  list(correct = TRUE,
+       message = "¡Excelente! Tu vector `poblacion` tiene las cinco cifras en orden.")
+} else if (isTRUE(all.equal(sort(valor), sort(esperado)))) {
+  list(correct = FALSE,
+       message = "Los números son correctos, pero el orden no. Escríbelos en el orden de la tabla.")
+} else {
+  incorrectos <- which(abs(valor - esperado) > 0)
+  list(correct = FALSE,
+       message = paste0("Revisa el valor en la(s) posición(es) ",
+                        paste(incorrectos, collapse = ", "),
+                        ": no coincide con la tabla."))
+}
+```
+
+## 4. Funciones
+
+Una **función** recibe datos, hace algo con ellos y devuelve un
+resultado. Se escribe el nombre de la función y, entre paréntesis, los
+datos. Algunas funciones útiles para vectores numéricos:
+
+| Función | Qué hace |
+|:--|:--|
+| `sum(x)` | Suma todos los elementos |
+| `mean(x)` | Calcula el promedio |
+| `max(x)` / `min(x)` | Valor más grande / más pequeño |
+| `length(x)` | Cuántos elementos tiene |
+
+```{webr}
+precios <- c(28, 45, 19, 62)
+
+sum(precios)      # costo total de la canasta
+mean(precios)     # precio promedio
+max(precios)      # el producto más caro
+length(precios)   # cuántos productos son
+```
+
+```{webr}
+#| setup: true
+#| exercise: [ej4, ej5, ej6]
+# Datos que ya están cargados para los ejercicios 4, 5 y 6
+municipios <- c("Oaxaca de Juárez", "San Juan Bautista Tuxtepec",
+                "Juchitán de Zaragoza", "Santa Cruz Xoxocotlán", "Salina Cruz")
+poblacion <- c(270955, 159452, 113570, 100402, 84438)
+```
+
+### Ejercicio 4
+
+Ya tienes cargado el vector `poblacion` del ejercicio anterior. Usa una
+función para calcular la **población total** de los cinco municipios.
+
+```{webr}
+#| exercise: ej4
+#| caption: Ejercicio 4
+______(poblacion)
+```
+
+::: {.hint exercise="ej4"}
+::: {.callout-note collapse="false"}
+## Pista
+"Total" significa sumar todos los valores. Busca en la tabla la función
+que suma.
+:::
+:::
+
+::: {.solution exercise="ej4"}
+::: {.callout-tip collapse="false"}
+## Solución
+```r
+sum(poblacion)
+```
+:::
+:::
+
+```{webr}
+#| exercise: ej4
+#| check: true
+total <- sum(c(270955, 159452, 113570, 100402, 84438))
+
+if (is.null(.result) || !is.numeric(.result)) {
+  list(correct = FALSE, message = "Tu código debe producir un número.")
+} else if (isTRUE(all.equal(.result, total))) {
+  list(correct = TRUE,
+       message = "¡Correcto! Los cinco municipios suman 728,817 habitantes.")
+} else if (isTRUE(all.equal(.result, total / 5))) {
+  list(correct = FALSE,
+       message = "Calculaste el promedio. Se pide el total: usa la función que suma.")
+} else if (isTRUE(all.equal(.result, 270955))) {
+  list(correct = FALSE,
+       message = "Ese es el valor máximo, no el total. Usa la función que suma todos los elementos.")
+} else if (isTRUE(all.equal(.result, 5))) {
+  list(correct = FALSE,
+       message = "`length()` cuenta cuántos elementos hay. Para el total necesitas sumarlos.")
+} else {
+  list(correct = FALSE,
+       message = "Ese no es el total. Aplica a `poblacion` la función que suma todos sus elementos.")
+}
+```
+
+## 5. Extraer elementos con corchetes
+
+Cada elemento de un vector tiene una **posición**, empezando en 1. Para
+obtener un elemento, escribe el nombre del vector y la posición entre
+corchetes.
+
+```{webr}
+productos <- c("tortillas", "queso", "frijol", "café")
+productos[2]          # el segundo elemento
+productos[c(1, 4)]    # el primero y el cuarto
+```
+
+### Ejercicio 5
+
+Ya tienes cargado el vector `municipios`. Extrae el nombre del
+**tercer** municipio.
+
+```{webr}
+#| exercise: ej5
+#| caption: Ejercicio 5
+municipios[______]
+```
+
+::: {.hint exercise="ej5"}
+::: {.callout-note collapse="false"}
+## Pista
+Escribe dentro de los corchetes el número de la posición que quieres.
+:::
+:::
+
+::: {.solution exercise="ej5"}
+::: {.callout-tip collapse="false"}
+## Solución
+```r
+municipios[3]
+```
+:::
+:::
+
+```{webr}
+#| exercise: ej5
+#| check: true
+municipios_ok <- c("Oaxaca de Juárez", "San Juan Bautista Tuxtepec",
+                   "Juchitán de Zaragoza", "Santa Cruz Xoxocotlán", "Salina Cruz")
+
+if (identical(.result, "Juchitán de Zaragoza")) {
+  list(correct = TRUE, message = "¡Así es! El tercer elemento es Juchitán de Zaragoza.")
+} else if (is.character(.result) && length(.result) == 1 && .result %in% municipios_ok) {
+  posicion <- match(.result, municipios_ok)
+  list(correct = FALSE,
+       message = paste0("Obtuviste el elemento de la posición ", posicion,
+                        ". Se pide el tercero."))
+} else if (is.character(.result) && length(.result) > 1) {
+  list(correct = FALSE,
+       message = "Obtuviste más de un municipio. Escribe un solo número dentro de los corchetes.")
+} else {
+  list(correct = FALSE,
+       message = "Usa corchetes con el número de la posición, por ejemplo `municipios[1]`.")
+}
+```
+
+## Reto final
+
+### Ejercicio 6
+
+Combina lo que aprendiste: calcula qué **porcentaje** de la población
+total de los cinco municipios vive en Oaxaca de Juárez (el primer
+elemento de `poblacion`). El resultado debe ser un número entre 0 y 100.
+
+```{webr}
+#| exercise: ej6
+#| caption: Ejercicio 6 (reto)
+
+```
+
+::: {.hint exercise="ej6"}
+::: {.callout-note collapse="false"}
+## Pista 1
+Un porcentaje es *parte / total × 100*.
+:::
+:::
+
+::: {.hint exercise="ej6"}
+::: {.callout-note collapse="false"}
+## Pista 2
+La parte es `poblacion[1]` y el total es `sum(poblacion)`.
+:::
+:::
+
+::: {.solution exercise="ej6"}
+::: {.callout-tip collapse="false"}
+## Solución
+```r
+poblacion[1] / sum(poblacion) * 100
+```
+:::
+:::
+
+```{webr}
+#| exercise: ej6
+#| check: true
+p <- c(270955, 159452, 113570, 100402, 84438)
+correcto <- p[1] / sum(p) * 100
+
+if (is.null(.result) || !is.numeric(.result) || length(.result) != 1) {
+  list(correct = FALSE, message = "Tu código debe producir un solo número.")
+} else if (isTRUE(all.equal(.result, correcto))) {
+  list(correct = TRUE,
+       message = paste0("¡Excelente! Cerca del ", round(correcto, 1),
+                        " % de la población de estos cinco municipios vive en la capital."))
+} else if (isTRUE(all.equal(.result, correcto / 100))) {
+  list(correct = FALSE,
+       message = "Obtuviste la proporción (entre 0 y 1). Multiplícala por 100 para expresarla como porcentaje.")
+} else if (isTRUE(all.equal(.result, round(correcto))) ||
+           isTRUE(all.equal(.result, round(correcto, 1))) ||
+           isTRUE(all.equal(.result, round(correcto, 2)))) {
+  list(correct = TRUE,
+       message = "¡Correcto! Además redondeaste el resultado. Muy bien.")
+} else if (.result > 100) {
+  list(correct = FALSE,
+       message = "Tu resultado es mayor que 100. ¿Dividiste el total entre la parte en lugar de la parte entre el total?")
+} else {
+  list(correct = FALSE,
+       message = "Ese no es el porcentaje. Revisa la fórmula: parte / total × 100.")
+}
+```
+
+## Resumen
+
+| Concepto | Ejemplo |
+|:--|:--|
+| Operación | `85 * 3 + 25 * 2` |
+| Crear un objeto | `precio_tlayuda <- 85` |
+| Crear un vector | `poblacion <- c(270955, 159452)` |
+| Aplicar una función | `sum(poblacion)` |
+| Extraer un elemento | `municipios[3]` |
+
+::: {.callout-tip}
+## Para practicar por tu cuenta
+Usa el bloque de abajo para experimentar. Por ejemplo: ¿cuál es el
+municipio con menos población? Prueba `min(poblacion)` y después
+`which.min(poblacion)`. ¿Qué diferencia hay?
+:::
+
+```{webr}
+#| caption: Espacio libre para practicar
+municipios <- c("Oaxaca de Juárez", "San Juan Bautista Tuxtepec",
+                "Juchitán de Zaragoza", "Santa Cruz Xoxocotlán", "Salina Cruz")
+poblacion <- c(270955, 159452, 113570, 100402, 84438)
+
+```

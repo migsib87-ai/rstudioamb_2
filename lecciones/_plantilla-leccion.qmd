@@ -1,0 +1,96 @@
+---
+title: "Lección N: Título de la lección"
+subtitle: "Subtítulo breve"
+# Si la lección necesita paquetes, descomenta y ajusta:
+# webr:
+#   packages:
+#     - dplyr
+# Si necesita archivos de datos (se copian al "disco" de R en el navegador):
+# resources:
+#   - ../datos/municipios_oaxaca.csv
+---
+
+<!--
+  PLANTILLA PARA NUEVAS LECCIONES
+  1. Copia este archivo con un nombre como 02-data-frames.qmd
+     (los archivos que empiezan con _ no se publican).
+  2. Agrégalo a la lista "Lecciones" en _quarto.yml.
+  3. Ejecuta `quarto preview` para verlo.
+-->
+
+{{< include ../_extensions/r-wasm/live/_knitr.qmd >}}
+
+::: {.objetivos}
+### Al terminar esta lección podrás
+
+- Objetivo 1
+- Objetivo 2
+:::
+
+## 1. Tema
+
+Explicación breve.
+
+Bloque de práctica libre (el estudiante puede editarlo y ejecutarlo):
+
+```{webr}
+x <- c(1, 2, 3)
+mean(x)
+```
+
+### Ejercicio 1
+
+Instrucción clara del ejercicio.
+
+<!-- (Opcional) Datos que se cargan antes del ejercicio sin que el estudiante los vea.
+     Puede compartirse entre varios ejercicios: exercise: [ej1, ej2] -->
+```{webr}
+#| setup: true
+#| exercise: ej1
+datos <- c(10, 20, 30)
+```
+
+<!-- Editor del estudiante. Los ______ obligan a completar antes de ejecutar. -->
+```{webr}
+#| exercise: ej1
+#| caption: Ejercicio 1
+______(datos)
+```
+
+<!-- Pistas: se muestran una por una con el botón "Ver pista". -->
+::: {.hint exercise="ej1"}
+::: {.callout-note collapse="false"}
+## Pista
+Texto de la pista.
+:::
+:::
+
+::: {.solution exercise="ej1"}
+::: {.callout-tip collapse="false"}
+## Solución
+```r
+mean(datos)
+```
+:::
+:::
+
+<!--
+  Código de revisión. Variables disponibles:
+    .result        valor de la última línea del código del estudiante
+    .user_code     el código del estudiante como texto
+    .envir_result  entorno con los objetos que creó el estudiante
+                   (usa get0("nombre", envir = .envir_result, inherits = FALSE))
+  Debe terminar devolviendo list(correct = TRUE/FALSE, message = "texto").
+  Consejo: anticipa los errores más comunes y da un mensaje específico para cada uno.
+-->
+```{webr}
+#| exercise: ej1
+#| check: true
+if (isTRUE(all.equal(.result, 20))) {
+  list(correct = TRUE, message = "¡Correcto!")
+} else if (isTRUE(all.equal(.result, 60))) {
+  list(correct = FALSE, message = "Calculaste la suma; se pide el promedio.")
+} else {
+  list(correct = FALSE, message = "Aún no. Revisa qué función calcula el promedio.")
+}
+```

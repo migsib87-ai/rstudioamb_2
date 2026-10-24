@@ -1,0 +1,45 @@
+---
+title: "Inicio"
+title-block-style: none
+toc: false
+---
+
+{{< include ./_extensions/r-wasm/live/_knitr.qmd >}}
+
+::: {.titulo-portada}
+Aprende R escribiendo R
+:::
+
+::: {.subtitulo-portada}
+Cada lección combina explicaciones breves con ejercicios que puedes
+ejecutar aquí mismo. Al revisar tu código, el sitio te dice si vas bien
+y, si no, qué revisar. No necesitas instalar nada.
+:::
+
+Pruébalo ahora: escribe `2 + 2` en el recuadro y presiona **Ejecutar**.
+
+```{webr}
+#| caption: Tu primera línea de R
+
+```
+
+## Cómo usar este tutorial
+
+1. Avanza las lecciones en orden; cada una se apoya en la anterior.
+2. Lee la explicación y juega con los bloques de código de ejemplo: puedes modificarlos y volver a ejecutarlos cuantas veces quieras.
+3. En los **ejercicios** (recuadros con borde rojo) escribe tu respuesta y presiona **Ejecutar**. Aparecerá un mensaje verde si es correcta, o una indicación de qué corregir si no lo es.
+4. Si te atoras, usa **Ver pista**. Intenta resolverlo antes de abrir **Ver solución**.
+
+::: {.callout-note}
+## Primera carga
+La primera vez que abres una lección, R tarda algunos segundos en cargarse
+en tu navegador. Después funciona de inmediato. Si usas el celular,
+funciona, pero es más cómodo en computadora.
+:::
+
+## Lecciones
+
+| Lección | Lo que aprenderás |
+|:--|:--|
+| [1. Primeros pasos](lecciones/01-primeros-pasos.qmd) | Usar R como calculadora, crear objetos, vectores y funciones básicas |
+| 2. Tablas de datos *(próximamente)* | Data frames con información de municipios de Oaxaca |

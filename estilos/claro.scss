@@ -1,0 +1,25 @@
+/*-- scss:defaults --*/
+// Tipografía pensada para lectura en pantalla y en proyector
+@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap');
+
+// Paleta inspirada en tintes tradicionales de Oaxaca
+$anil:   #23335E;   // azul añil
+$grana:  #8E1F3A;   // rojo grana cochinilla
+$maguey: #4F6B47;   // verde maguey
+$tinta:  #1E2230;
+
+$body-bg:    #FFFFFF;
+$body-color: $tinta;
+$primary:    $anil;
+$success:    $maguey;
+$danger:     $grana;
+$link-color: $anil;
+
+$font-family-sans-serif: "Atkinson Hyperlegible", "Segoe UI", Roboto, Arial, sans-serif;
+$font-family-monospace:  "JetBrains Mono", Consolas, "Courier New", monospace;
+$font-size-root: 18px;
+$headings-color: $anil;
+$headings-font-weight: 700;
+
+/*-- scss:rules --*/
+@import "comunes";
